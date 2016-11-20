@@ -1,5 +1,6 @@
 # SquareLoading
 
+[![](https://jitpack.io/v/yuweiguocn/SquareLoading.svg)](https://jitpack.io/#yuweiguocn/SquareLoading)
 
 ![](/art/square-loading-demo.gif)
 
