@@ -15,7 +15,7 @@
     <io.github.yuweiguocn.lib.squareloading.SquareLoading
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FD3260"
+        android:background="#E91E63"
         app:squareColor="@android:color/white"
         app:squareSize="12dp"
         app:dividerSize="2dp"
