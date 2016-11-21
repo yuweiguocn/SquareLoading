@@ -37,6 +37,7 @@ Design by [Divan Raj](https://www.uplabs.com/desdivj) from [Animated Loader](htt
         android:background="#E91E63"
         app:squareColor="@android:color/white"
         app:squareSize="12dp"
+        app:squareCorner="2dp"
         app:dividerSize="2dp"
         app:xCount="4"
         app:yCount="3"

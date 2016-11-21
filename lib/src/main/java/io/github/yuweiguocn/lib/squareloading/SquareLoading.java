@@ -23,6 +23,7 @@ public class SquareLoading extends ViewGroup {
 
     private static final int DEFAULT_SQUARE_COLOR = Color.WHITE;
     private static final int DEFAULT_SQUARE_SIZE = 36;
+    private static final int DEFAULT_SQUARE_CORNER = 8;
     private static final int DEFAULT_DIVIDER_SIZE = 8;
     private static final int DEFUALT_X_COUNT=4;
     private static final int DEFUALT_Y_COUNT=3;
@@ -32,6 +33,7 @@ public class SquareLoading extends ViewGroup {
 
     private static int mSquareColor = DEFAULT_SQUARE_COLOR;
     private static int mSquareSize = DEFAULT_SQUARE_SIZE;
+    private static int mSquareCorner = DEFAULT_SQUARE_CORNER;
     private static int mDividerSize = DEFAULT_DIVIDER_SIZE;
     private static int mXCount = DEFUALT_X_COUNT;
     private static int mYCount = DEFUALT_Y_COUNT;
@@ -70,6 +72,7 @@ public class SquareLoading extends ViewGroup {
 
             mSquareColor = a.getColor(R.styleable.SquareLoading_squareColor, DEFAULT_SQUARE_COLOR);
             mSquareSize = a.getDimensionPixelSize(R.styleable.SquareLoading_squareSize, DEFAULT_SQUARE_SIZE);
+            mSquareCorner = a.getDimensionPixelSize(R.styleable.SquareLoading_squareCorner, DEFAULT_SQUARE_CORNER);
             mDividerSize = a.getDimensionPixelSize(R.styleable.SquareLoading_dividerSize, DEFAULT_DIVIDER_SIZE);
 
             int xCount = a.getInteger(R.styleable.SquareLoading_xCount, DEFUALT_X_COUNT);
@@ -99,6 +102,7 @@ public class SquareLoading extends ViewGroup {
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setColor(mSquareColor);
         gradientDrawable.setSize(mSquareSize, mSquareSize);
+        gradientDrawable.setCornerRadius(mSquareCorner);
         for (int i = 0; i < mXCount * mYCount; i++) {
             ImageView image = new ImageView(context);
             image.setImageDrawable(gradientDrawable);
@@ -143,7 +147,7 @@ public class SquareLoading extends ViewGroup {
                             public void run() {
                                 startReverseAnim(mLastIndex);
                             }
-                        }, 200);
+                        }, 300);
                     }
                 }
 
@@ -189,7 +193,7 @@ public class SquareLoading extends ViewGroup {
                             public void run() {
                                 startRotateAnim(mFirstIndex);
                             }
-                        }, 200);
+                        }, 300);
                     }
                 }
 
