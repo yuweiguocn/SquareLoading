@@ -26,7 +26,7 @@ Design by [Divan Raj](https://www.uplabs.com/desdivj) from [Animated Loader](htt
 2.Add the dependency
 ```
 	dependencies {
-	        compile 'com.github.yuweiguocn:SquareLoading:v1.1.0'
+	        compile 'com.github.yuweiguocn:SquareLoading:v1.2.0'
 	}
 ```
 3.Add SquareLoading to you layout

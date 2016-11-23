@@ -272,7 +272,7 @@ public class SquareLoading extends ViewGroup {
         int index;
         if (isStart) {
             if (i < mXCount) {
-                i += (mXCount - 1) * mYCount;
+                i += mXCount * (mYCount - 1) + 1;
                 return i;
             }
             index = i % mXCount + (i / mXCount - 1) * mXCount;
