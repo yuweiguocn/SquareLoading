@@ -112,7 +112,7 @@ public class SquareLoading extends ViewGroup {
 
     private void initAnim() {
         for (int i = 0; i < getChildCount(); i++) {
-            RotateAnimation startAnim = new RotateAnimation(0, -90,0,mSquareSize);
+            RotateAnimation startAnim = new RotateAnimation(0, -90, 0, mSquareSize);
             startAnim.setDuration(300);
             startAnim.setFillAfter(true);
             startAnim.setInterpolator(new DecelerateInterpolator());
@@ -121,33 +121,16 @@ public class SquareLoading extends ViewGroup {
                 @Override
                 public void onAnimationStart(Animation animation) {
                     if (finalI != mLastIndex) {
-                        final int index = getNextAnimChild(true, finalI);
-                        if (index > mXCount * (mYCount - 1)) {
-                            postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    startRotateAnim(index);
-                                }
-                            }, 100);
-                        }else {
-                            postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    startRotateAnim(index);
-                                }
-                            }, 50);
-                        }
+                        int index = getNextAnimChild(true, finalI);
+                        int delayMillis = index > mFirstIndex ? 100 : 50;
+                        startRotateAnim(index , delayMillis);
                     }
                 }
+
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     if (finalI == mLastIndex) {
-                        postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                startReverseAnim(mLastIndex);
-                            }
-                        }, 300);
+                        startReverseAnim(mLastIndex, 300);
                     }
                 }
 
@@ -166,34 +149,16 @@ public class SquareLoading extends ViewGroup {
                 @Override
                 public void onAnimationStart(Animation animation) {
                     if (finalI1 != mFirstIndex) {
-                        final int index = getNextAnimChild(false, finalI1);
-                        if (index < mXCount) {
-                            postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    startReverseAnim(index);
-                                }
-                            }, 100);
-                        } else {
-                            postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    startReverseAnim(index);
-                                }
-                            }, 50);
-                        }
+                        int index = getNextAnimChild(false, finalI1);
+                        int delayMillis = index < mXCount ? 100 : 50;
+                        startReverseAnim(index, delayMillis);
                     }
                 }
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     if (finalI1 == mFirstIndex) {
-                        postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                startRotateAnim(mFirstIndex);
-                            }
-                        }, 300);
+                        startRotateAnim(mFirstIndex, 300);
                     }
                 }
 
@@ -249,8 +214,8 @@ public class SquareLoading extends ViewGroup {
             View child = getChildAt(i);
             l = (i % mXCount + 1) * mSquareSize + (i % mXCount) * mDividerSize + mPaddingLeft;
             t = (i / mXCount + 1) * mSquareSize + (i / mXCount) * mDividerSize + mPaddingTop;
-            r = ((i % mXCount) + 2) * mSquareSize + (i % mXCount) * mDividerSize + mPaddingLeft;
-            b = ((i / mXCount) + 2) * mSquareSize + (i / mXCount) * mDividerSize + mPaddingTop;
+            r = l + mSquareSize;
+            b = t + mSquareSize;
             child.layout(l, t, r, b);
         }
     }
@@ -268,17 +233,35 @@ public class SquareLoading extends ViewGroup {
         }
     }
 
+    private void startRotateAnim(final int index, int delayMillis) {
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startRotateAnim(index);
+            }
+        }, delayMillis);
+    }
+
+    private void startReverseAnim(final int index, int delayMillis) {
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startReverseAnim(index);
+            }
+        }, delayMillis);
+    }
+
     private int getNextAnimChild(boolean isStart, int i) {
         int index;
         if (isStart) {
             if (i < mXCount) {
-                i += mXCount * (mYCount - 1) + 1;
+                i += mFirstIndex + 1;
                 return i;
             }
-            index = i % mXCount + (i / mXCount - 1) * mXCount;
+            index = i - mXCount;
         }else {
-            if (i > mXCount * (mYCount - 1)) {
-                i -= mXCount * (mYCount - 1) + 1;
+            if (i > mFirstIndex) {
+                i -= mFirstIndex + 1;
                 return i;
             }
             index = i + mXCount;
@@ -290,17 +273,16 @@ public class SquareLoading extends ViewGroup {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        if (startAnims != null) {
-            for (int i = 0; i < startAnims.size(); i++) {
-                startAnims.get(i).cancel();
+        cancelAnims(startAnims);
+        cancelAnims(reverseAnims);
+    }
+
+    private void cancelAnims(List<RotateAnimation> anims){
+        if (anims != null) {
+            for (RotateAnimation anim : anims) {
+                anim.cancel();
             }
-            startAnims.clear();
-        }
-        if (reverseAnims != null) {
-            for (int i = 0; i < reverseAnims.size(); i++) {
-                reverseAnims.get(i).cancel();
-            }
-            reverseAnims.clear();
+            anims.clear();
         }
     }
 }
