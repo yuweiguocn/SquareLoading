@@ -1,5 +1,5 @@
 # SquareLoading
-
+[ ![Download](https://api.bintray.com/packages/yuweiguocn/maven/SquareLoading/images/download.svg) ](https://bintray.com/yuweiguocn/maven/SquareLoading/_latestVersion)
 [![](https://jitpack.io/v/yuweiguocn/SquareLoading.svg)](https://jitpack.io/#yuweiguocn/SquareLoading)
 
 ![](/art/square-loading-demo.gif)
@@ -14,22 +14,13 @@ Design by [Divan Raj](https://www.uplabs.com/desdivj) from [Animated Loader](htt
 
 
 ## How to use
-1.Add it in your root build.gradle at the end of repositories:
-```
-	allprojects {
-		repositories {
-			...
-			maven { url "https://jitpack.io" }
-		}
-	}
-```
-2.Add the dependency
+1.Add the dependency
 ```
 	dependencies {
-	        compile 'com.github.yuweiguocn:SquareLoading:v1.2.0'
+	        compile 'io.github.yuweiguocn:SquareLoading:1.3.0'
 	}
 ```
-3.Add SquareLoading to you layout
+2.Add SquareLoading to you layout
 ```
 <io.github.yuweiguocn.lib.squareloading.SquareLoading
         android:layout_width="match_parent"
