@@ -1,6 +1,7 @@
 # SquareLoading
 [ ![Download](https://api.bintray.com/packages/yuweiguocn/maven/SquareLoading/images/download.svg) ](https://bintray.com/yuweiguocn/maven/SquareLoading/_latestVersion)
 [![](https://jitpack.io/v/yuweiguocn/SquareLoading.svg)](https://jitpack.io/#yuweiguocn/SquareLoading)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-SquareLoading-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/4849)
 
 ![](/art/square-loading-demo.gif)
 
